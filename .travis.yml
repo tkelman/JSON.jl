@@ -7,7 +7,8 @@ env:
     - JULIAVERSION="download/linux-i386"
     - JULIAVERSION="download/linux-x86_64"
 before_install:
-    - curl -L "https://status.julialang.org/$JULIAVERSION" | tar -C ~/julia -x -z -f -
+    - mkdir -p ~/julia
+    - curl -L https://status.julialang.org/$JULIAVERSION | tar -C ~/julia --strip-components=1 -x -z -f -
     - export PATH=$PATH:$HOME/julia/bin
     - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
 script:
